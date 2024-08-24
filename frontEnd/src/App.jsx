@@ -1,5 +1,9 @@
+import DisplayTasks from "./pages/displayTasks/DisplayTasks";
+import Navbar from "./pages/navbar/Navbar";
+
 export default function App() {
 	return (<>
-		<h1>Hello World</h1>
+		<Navbar></Navbar>
+		<DisplayTasks></DisplayTasks>
 	</>)
 }
