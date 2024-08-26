@@ -5,10 +5,18 @@ import { TaskContext } from "../../contexts/TaskContext";
 export default function DisplayTasks() {
 	const [newtask, setNewtask] = useState(false);
 	const [desc, setDesc] = useState("")
-	const { tasks, addTask } = useContext(TaskContext)
+	const { tasks, addTask, changeProgress, delTask } = useContext(TaskContext)
 
 	function handleNewtask() {
 		setNewtask((val) => !val);
+	}
+
+	function deleteTask(id) {
+		delTask(id)
+	}
+
+	function handleProgress(id) {
+		changeProgress(id)
 	}
 
 	function handleChange(e) {
@@ -28,13 +36,15 @@ export default function DisplayTasks() {
 						<div className="task">
 							<h2 className="heading">Progress Heading</h2>
 							{tasks.map((task, index) => (
-								<div className="task" key={index}>
-									<span>{index + 1}.</span><p>TASK: {task.desc}</p>
+								< div className="task" key={index} >
+									<span>{index + 1}.</span><p>id: {task.id}</p>
+									<p>TASK: {task.desc}</p>
 									{(task.progress) ?
 										< p > STATUS : completed</p>
 										:
 										<p>STATUS: NOT completed</p>}
-									<button>DONE</button>
+									<button onClick={() => handleProgress(task.id)}> {task.progress ? "UNDO" : "DONE"}</button>
+									<button onClick={() => deleteTask(task.id)}>DELETE</button>
 								</div>
 							))}
 						</div>
@@ -48,7 +58,7 @@ export default function DisplayTasks() {
 						<div className="formContainer">
 							<label>Description :</label>
 							<input type="text" onChange={(e) => handleChange(e)} />
-							<button onClick={() => handleAdd()} >ADD</button>
+							<button type="submit" onClick={() => handleAdd()} >ADD</button>
 							<button onClick={() => handleNewtask()}>X</button>
 						</div>
 					)}
