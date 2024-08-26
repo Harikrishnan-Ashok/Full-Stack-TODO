@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres
+    container_name: dbContainer
+    env_file:
+      - .env
+    ports:
+      - "${DATABASE_PORT}:5432"
+    volumes:
+      - "./postgres_data:/var/lib/postgresql/data"
+  nocodb:
+    image: "nocodb/nocodb:latest"
+    container_name: nocoContainer
+    ports:
+      - "8080:8080"
+    restart: always
+    volumes:
+      - "./nc_data:/usr/app/data"
+
+
+
