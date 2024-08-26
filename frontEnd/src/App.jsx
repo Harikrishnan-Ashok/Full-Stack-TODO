@@ -1,6 +1,5 @@
 import DisplayTasks from "./pages/displayTasks/DisplayTasks";
-import Navbar from "./pages/navbar/Navbar";
-
+import Navbar from "./components/Navbar/Navbar";
 export default function App() {
 	return (<>
 		<Navbar></Navbar>

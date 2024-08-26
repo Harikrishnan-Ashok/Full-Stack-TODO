@@ -33,26 +33,45 @@ export default function DisplayTasks() {
 				<h1 className="heading">Tasks</h1>
 				<div className="sectionContainer">
 					<div className="blocks">
-						<div className="task">
-							<h2 className="heading">Progress Heading</h2>
-							{tasks.map((task, index) => (
-								< div className="task" key={index} >
-									<span>{index + 1}.</span><p>id: {task.id}</p>
-									<p>TASK: {task.desc}</p>
-									{(task.progress) ?
-										< p > STATUS : completed</p>
-										:
-										<p>STATUS: NOT completed</p>}
-									<button onClick={() => handleProgress(task.id)}> {task.progress ? "UNDO" : "DONE"}</button>
-									<button onClick={() => deleteTask(task.id)}>DELETE</button>
-								</div>
-							))}
+						<div className="heading">
+							<h2>TODO</h2>
+							<div className="taskCont">
+								{tasks.filter(task => !task.progress).map((task, index) => (
+									< div className="task" key={index} >
+										<span>{index + 1}.</span><p>id: {task.id}</p>
+										<p>TASK: {task.desc}</p>
+										{(task.progress) ?
+											< p > STATUS : completed</p>
+											:
+											<p>STATUS: NOT completed</p>}
+										<button onClick={() => handleProgress(task.id)}> {task.progress ? "UNDO" : "DONE"}</button>
+										<button onClick={() => deleteTask(task.id)}>DELETE</button>
+									</div>
+								))}
+							</div>
 						</div>
-						<button className="new" onClick={() => handleNewtask()}>
-							+ New One
-						</button>
+						<div className="heading">
+							<h2>COMPLETED</h2>
+							<div className="taskCont">
+								{tasks.filter(task => task.progress).map((task, index) => (
+									< div className="task" key={index} >
+										<span>{index + 1}.</span><p>id: {task.id}</p>
+										<p>TASK: {task.desc}</p>
+										{(task.progress) ?
+											< p > STATUS : completed</p>
+											:
+											<p>STATUS: NOT completed</p>}
+										<button onClick={() => handleProgress(task.id)}> {task.progress ? "UNDO" : "DONE"}</button>
+										<button onClick={() => deleteTask(task.id)}>DELETE</button>
+									</div>
+								))}
+							</div>
+						</div>
+
+
 					</div>
 				</div>
+				<button className="new" onClick={() => handleNewtask()}>+ New One</button>
 				<div className="newTaskContainer">
 					{newtask && (
 						<div className="formContainer">
