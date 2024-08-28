@@ -19,8 +19,19 @@ export default function TaskContextProvider({ children }) {
 		getTODO()
 	}, [])
 
+	async function insertTask(newDesc) {
+		const newtask = { desc: newDesc, progress: false }
+		const res = await axios.post(`${API_BASE_URL}/newtask`, newtask)
+		setTask((val) => [...val, res.data])
+	}
+
+	async function deleteTask(TaskId) {
+		await axios.delete(`${API_BASE_URL}/todo/${TaskId}`);
+		setTask((val) => val.filter((item) => item.id !== TaskId));
+	}
+
 	function addTask(newDesc) {
-		setTask((value) => [...value, { id: Date.now(), desc: newDesc, progress: false }])
+		insertTask(newDesc)
 	}
 
 	function changeProgress(TaskId) {
@@ -28,7 +39,7 @@ export default function TaskContextProvider({ children }) {
 	}
 
 	function delTask(TaskId) {
-		setTask((value) => value.filter((item) => item.id !== TaskId))
+		deleteTask(TaskId)
 	}
 
 	return (

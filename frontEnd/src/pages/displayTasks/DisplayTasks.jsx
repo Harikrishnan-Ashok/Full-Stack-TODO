@@ -24,6 +24,7 @@ export default function DisplayTasks() {
 	}
 
 	function handleAdd() {
+
 		addTask(desc)
 		console.log(tasks)
 	}
@@ -44,8 +45,8 @@ export default function DisplayTasks() {
 											< p > STATUS : completed</p>
 											:
 											<p>STATUS: NOT completed</p>}
-										<button onClick={() => handleProgress(task.id)}> {task.progress ? "UNDO" : "DONE"}</button>
-										<button onClick={() => deleteTask(task.id)}>DELETE</button>
+										<button className="butt" onClick={() => handleProgress(task.id)}> {task.progress ? "UNDO" : "DONE"}</button>
+										<button className="butt" onClick={() => deleteTask(task.id)}>DELETE</button>
 									</div>
 								))}
 							</div>

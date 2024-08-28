@@ -8,7 +8,6 @@ import (
 
 func main(){
 	initDB()
-	insertDummyData()
 	
 	r:=gin.Default()
 	r.Use(cors.Default())
@@ -20,6 +19,8 @@ func main(){
 	})
 
 	r.GET("/todos",GetTodo)
+	r.POST("/newtask",InsertTodo)
+	r.DELETE("/todo/:id", DeleteTodo)
 
 	r.Run(":8090")
 }

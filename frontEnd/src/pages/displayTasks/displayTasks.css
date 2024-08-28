@@ -13,7 +13,6 @@
 .blocks{
 	width:100%;
 	padding: 10px;
-	display: flex;
 	justify-content:space-around;
 }
 .formContainer
@@ -30,8 +29,10 @@
 }
 .taskCont
 {
+	width:100%;
 	display: flex;
-	width:50%;
+	flex-direction: column;
+	justify-content:space-evenly ;
 }
 
 .HeadingSpan
@@ -42,7 +43,16 @@
 }
 .new
 {
+	position: ;
 	width:25%;
 	margin-top: 100px;
 	align-self: center;
+}
+
+.butt
+{
+	height:auto;
+	width:auto;
+	margin:20px;
+	padding:10px;
 }

@@ -27,17 +27,3 @@ func initDB() {
         log.Fatalf("Failed to connect to database: %v", err)
     }
 }
-
-//the func to insert some data
-func insertDummyData() {
-    query := `INSERT INTO todo (description, status) VALUES
-    ('Learn Go', true),
-    ('Build a REST API', false),
-    ('Test PostgreSQL connection', true);`
-
-    _, err := db.Exec(query)
-    if err != nil {
-        log.Fatalf("Failed to insert dummy data: %v", err)
-    }
-}
-
