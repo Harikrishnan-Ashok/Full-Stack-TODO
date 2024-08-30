@@ -8,8 +8,8 @@ import (
 
 type Todo struct {
 	ID		int		`db:"id" json:"id"`
-	Desc	string		`db:"description" json:"desc"`	
-	Status	bool		`db:"status" json:"status"`
+	Desc	string	`db:"description" json:"desc"`	
+	Progress	bool	`db:"progress" json:"progress"`
 }
 
 func GetTodo(c *gin.Context){
@@ -32,8 +32,8 @@ func InsertTodo(c *gin.Context) {
 	}
 
 	// Insert the new todo into the database
-	query := "INSERT INTO todo (description, status) VALUES ($1, $2) RETURNING id"
-	err := db.QueryRow(query, todo.Desc, todo.Status).Scan(&todo.ID)
+	query := "INSERT INTO todo (description, progress) VALUES ($1, $2) RETURNING id"
+	err := db.QueryRow(query, todo.Desc, todo.Progress).Scan(&todo.ID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -46,4 +46,9 @@ func InsertTodo(c *gin.Context) {
 func DeleteTodo(c *gin.Context){
 	id := c.Param("id")
 	db.Exec("DELETE FROM todo WHERE id=$1",id)
+}
+
+func UpdateTodo(c *gin.Context){
+	id:=c.Param("id")
+	db.Exec("UPDATE todo SET progress= NOT progress WHERE id=$1",id)
 }

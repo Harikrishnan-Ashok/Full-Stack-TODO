@@ -30,12 +30,17 @@ export default function TaskContextProvider({ children }) {
 		setTask((val) => val.filter((item) => item.id !== TaskId));
 	}
 
+	async function updateTask(TaskId) {
+		await axios.put(`${API_BASE_URL}/updateTask/${TaskId}`)
+	}
+
 	function addTask(newDesc) {
 		insertTask(newDesc)
 	}
 
 	function changeProgress(TaskId) {
 		setTask((value) => value.map((item) => item.id === TaskId ? { ...item, progress: !item.progress } : item))
+		updateTask(TaskId)
 	}
 
 	function delTask(TaskId) {
@@ -48,3 +53,5 @@ export default function TaskContextProvider({ children }) {
 		</TaskContext.Provider>
 	)
 }
+
+

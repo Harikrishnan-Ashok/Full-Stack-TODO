@@ -21,6 +21,6 @@ func main(){
 	r.GET("/todos",GetTodo)
 	r.POST("/newtask",InsertTodo)
 	r.DELETE("/todo/:id", DeleteTodo)
-
+	r.PUT("updateTask/:id",UpdateTodo)
 	r.Run(":8090")
 }
